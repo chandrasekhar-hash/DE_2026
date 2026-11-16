@@ -1,0 +1,105 @@
+=== R25 run 1 ===
+Limit  (cost=1874.92..1875.04 rows=50 width=31) (actual time=1.115..1.118 rows=50.00 loops=1)
+  Buffers: shared hit=2403 read=75
+  ->  Sort  (cost=1874.92..1879.55 rows=1855 width=31) (actual time=1.114..1.116 rows=50.00 loops=1)
+        Sort Key: (count(s.stream_id)) DESC, a.release_date DESC
+        Sort Method: top-N heapsort  Memory: 31kB
+        Buffers: shared hit=2403 read=75
+        ->  HashAggregate  (cost=1794.74..1813.29 rows=1855 width=31) (actual time=1.036..1.066 rows=460.00 loops=1)
+              Group Key: t.track_id, a.release_date
+              Batches: 1  Memory Usage: 121kB
+              Buffers: shared hit=2397 read=75
+              ->  Nested Loop Left Join  (cost=5.69..1780.83 rows=1855 width=31) (actual time=0.024..0.954 rows=912.00 loops=1)
+                    Buffers: shared hit=2397 read=75
+                    ->  Nested Loop  (cost=5.27..1395.34 rows=503 width=23) (actual time=0.014..0.351 rows=460.00 loops=1)
+                          Buffers: shared hit=319
+                          ->  Bitmap Heap Scan on albums a  (cost=4.97..131.43 rows=89 width=8) (actual time=0.009..0.061 rows=84.00 loops=1)
+                                Recheck Cond: (release_date >= '2026-05-31'::date)
+                                Heap Blocks: exact=61
+                                Buffers: shared hit=63
+                                ->  Bitmap Index Scan on albums_release_idx  (cost=0.00..4.95 rows=89 width=0) (actual time=0.003..0.004 rows=84.00 loops=1)
+                                      Index Cond: (release_date >= '2026-05-31'::date)
+                                      Index Searches: 1
+                                      Buffers: shared hit=2
+                          ->  Index Scan using tracks_album_id_disc_no_track_no_key on tracks t  (cost=0.29..14.13 rows=7 width=23) (actual time=0.003..0.003 rows=5.48 loops=84)
+                                Index Cond: (album_id = a.album_id)
+                                Index Searches: 84
+                                Buffers: shared hit=256
+                    ->  Index Scan using streams_track_started_idx on streams s  (cost=0.42..0.72 rows=5 width=12) (actual time=0.001..0.001 rows=1.77 loops=460)
+                          Index Cond: (track_id = t.track_id)
+                          Index Searches: 460
+                          Buffers: shared hit=2078 read=75
+Planning:
+  Buffers: shared hit=466 read=2
+Planning Time: 0.745 ms
+Execution Time: 1.157 ms
+=== R25 run 2 ===
+Limit  (cost=1874.92..1875.04 rows=50 width=31) (actual time=0.923..0.926 rows=50.00 loops=1)
+  Buffers: shared hit=2478
+  ->  Sort  (cost=1874.92..1879.55 rows=1855 width=31) (actual time=0.923..0.924 rows=50.00 loops=1)
+        Sort Key: (count(s.stream_id)) DESC, a.release_date DESC
+        Sort Method: top-N heapsort  Memory: 31kB
+        Buffers: shared hit=2478
+        ->  HashAggregate  (cost=1794.74..1813.29 rows=1855 width=31) (actual time=0.848..0.876 rows=460.00 loops=1)
+              Group Key: t.track_id, a.release_date
+              Batches: 1  Memory Usage: 121kB
+              Buffers: shared hit=2472
+              ->  Nested Loop Left Join  (cost=5.69..1780.83 rows=1855 width=31) (actual time=0.019..0.772 rows=912.00 loops=1)
+                    Buffers: shared hit=2472
+                    ->  Nested Loop  (cost=5.27..1395.34 rows=503 width=23) (actual time=0.013..0.280 rows=460.00 loops=1)
+                          Buffers: shared hit=319
+                          ->  Bitmap Heap Scan on albums a  (cost=4.97..131.43 rows=89 width=8) (actual time=0.009..0.053 rows=84.00 loops=1)
+                                Recheck Cond: (release_date >= '2026-05-31'::date)
+                                Heap Blocks: exact=61
+                                Buffers: shared hit=63
+                                ->  Bitmap Index Scan on albums_release_idx  (cost=0.00..4.95 rows=89 width=0) (actual time=0.003..0.004 rows=84.00 loops=1)
+                                      Index Cond: (release_date >= '2026-05-31'::date)
+                                      Index Searches: 1
+                                      Buffers: shared hit=2
+                          ->  Index Scan using tracks_album_id_disc_no_track_no_key on tracks t  (cost=0.29..14.13 rows=7 width=23) (actual time=0.002..0.002 rows=5.48 loops=84)
+                                Index Cond: (album_id = a.album_id)
+                                Index Searches: 84
+                                Buffers: shared hit=256
+                    ->  Index Scan using streams_track_started_idx on streams s  (cost=0.42..0.72 rows=5 width=12) (actual time=0.001..0.001 rows=1.77 loops=460)
+                          Index Cond: (track_id = t.track_id)
+                          Index Searches: 460
+                          Buffers: shared hit=2153
+Planning:
+  Buffers: shared hit=468
+Planning Time: 0.744 ms
+Execution Time: 0.964 ms
+=== R25 run 3 ===
+Limit  (cost=1874.92..1875.04 rows=50 width=31) (actual time=0.943..0.946 rows=50.00 loops=1)
+  Buffers: shared hit=2478
+  ->  Sort  (cost=1874.92..1879.55 rows=1855 width=31) (actual time=0.943..0.944 rows=50.00 loops=1)
+        Sort Key: (count(s.stream_id)) DESC, a.release_date DESC
+        Sort Method: top-N heapsort  Memory: 31kB
+        Buffers: shared hit=2478
+        ->  HashAggregate  (cost=1794.74..1813.29 rows=1855 width=31) (actual time=0.866..0.895 rows=460.00 loops=1)
+              Group Key: t.track_id, a.release_date
+              Batches: 1  Memory Usage: 121kB
+              Buffers: shared hit=2472
+              ->  Nested Loop Left Join  (cost=5.69..1780.83 rows=1855 width=31) (actual time=0.017..0.787 rows=912.00 loops=1)
+                    Buffers: shared hit=2472
+                    ->  Nested Loop  (cost=5.27..1395.34 rows=503 width=23) (actual time=0.012..0.285 rows=460.00 loops=1)
+                          Buffers: shared hit=319
+                          ->  Bitmap Heap Scan on albums a  (cost=4.97..131.43 rows=89 width=8) (actual time=0.008..0.053 rows=84.00 loops=1)
+                                Recheck Cond: (release_date >= '2026-05-31'::date)
+                                Heap Blocks: exact=61
+                                Buffers: shared hit=63
+                                ->  Bitmap Index Scan on albums_release_idx  (cost=0.00..4.95 rows=89 width=0) (actual time=0.003..0.003 rows=84.00 loops=1)
+                                      Index Cond: (release_date >= '2026-05-31'::date)
+                                      Index Searches: 1
+                                      Buffers: shared hit=2
+                          ->  Index Scan using tracks_album_id_disc_no_track_no_key on tracks t  (cost=0.29..14.13 rows=7 width=23) (actual time=0.002..0.002 rows=5.48 loops=84)
+                                Index Cond: (album_id = a.album_id)
+                                Index Searches: 84
+                                Buffers: shared hit=256
+                    ->  Index Scan using streams_track_started_idx on streams s  (cost=0.42..0.72 rows=5 width=12) (actual time=0.001..0.001 rows=1.77 loops=460)
+                          Index Cond: (track_id = t.track_id)
+                          Index Searches: 460
+                          Buffers: shared hit=2153
+Planning:
+  Buffers: shared hit=468
+Planning Time: 0.784 ms
+Execution Time: 0.985 ms

@@ -1,0 +1,78 @@
+=== R04 run 1 ===
+Limit  (cost=5455.85..5456.77 rows=8 width=33) (actual time=4.605..5.152 rows=6.00 loops=1)
+  Buffers: shared hit=2603
+  ->  Gather Merge  (cost=5455.85..5456.77 rows=8 width=33) (actual time=4.605..5.151 rows=6.00 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=2603
+        ->  Sort  (cost=4455.84..4455.86 rows=5 width=33) (actual time=3.788..3.788 rows=3.00 loops=2)
+              Sort Key: s.started_at DESC
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=2603
+              Worker 0:  Sort Method: quicksort  Memory: 25kB
+              ->  Nested Loop  (cost=0.29..4455.79 rows=5 width=33) (actual time=1.174..3.780 rows=3.00 loops=2)
+                    Buffers: shared hit=2595
+                    ->  Parallel Seq Scan on streams s  (cost=0.00..4414.24 rows=5 width=22) (actual time=1.167..3.766 rows=3.00 loops=2)
+                          Filter: (user_id = 1038)
+                          Rows Removed by Filter: 124997
+                          Buffers: shared hit=2576
+                    ->  Index Scan using tracks_pkey on tracks t  (cost=0.29..8.31 rows=1 width=19) (actual time=0.004..0.004 rows=1.00 loops=6)
+                          Index Cond: (track_id = s.track_id)
+                          Index Searches: 6
+                          Buffers: shared hit=19
+Planning:
+  Buffers: shared hit=268
+Planning Time: 0.337 ms
+Execution Time: 5.174 ms
+=== R04 run 2 ===
+Limit  (cost=5455.85..5456.77 rows=8 width=33) (actual time=4.527..5.192 rows=6.00 loops=1)
+  Buffers: shared hit=2603
+  ->  Gather Merge  (cost=5455.85..5456.77 rows=8 width=33) (actual time=4.527..5.191 rows=6.00 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=2603
+        ->  Sort  (cost=4455.84..4455.86 rows=5 width=33) (actual time=3.738..3.738 rows=3.00 loops=2)
+              Sort Key: s.started_at DESC
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=2603
+              Worker 0:  Sort Method: quicksort  Memory: 25kB
+              ->  Nested Loop  (cost=0.29..4455.79 rows=5 width=33) (actual time=1.158..3.731 rows=3.00 loops=2)
+                    Buffers: shared hit=2595
+                    ->  Parallel Seq Scan on streams s  (cost=0.00..4414.24 rows=5 width=22) (actual time=1.153..3.717 rows=3.00 loops=2)
+                          Filter: (user_id = 1038)
+                          Rows Removed by Filter: 124997
+                          Buffers: shared hit=2576
+                    ->  Index Scan using tracks_pkey on tracks t  (cost=0.29..8.31 rows=1 width=19) (actual time=0.004..0.004 rows=1.00 loops=6)
+                          Index Cond: (track_id = s.track_id)
+                          Index Searches: 6
+                          Buffers: shared hit=19
+Planning:
+  Buffers: shared hit=268
+Planning Time: 0.319 ms
+Execution Time: 5.213 ms
+=== R04 run 3 ===
+Limit  (cost=5455.85..5456.77 rows=8 width=33) (actual time=4.677..5.308 rows=6.00 loops=1)
+  Buffers: shared hit=2603
+  ->  Gather Merge  (cost=5455.85..5456.77 rows=8 width=33) (actual time=4.676..5.307 rows=6.00 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=2603
+        ->  Sort  (cost=4455.84..4455.86 rows=5 width=33) (actual time=3.863..3.863 rows=3.00 loops=2)
+              Sort Key: s.started_at DESC
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=2603
+              Worker 0:  Sort Method: quicksort  Memory: 25kB
+              ->  Nested Loop  (cost=0.29..4455.79 rows=5 width=33) (actual time=0.920..3.855 rows=3.00 loops=2)
+                    Buffers: shared hit=2595
+                    ->  Parallel Seq Scan on streams s  (cost=0.00..4414.24 rows=5 width=22) (actual time=0.913..3.840 rows=3.00 loops=2)
+                          Filter: (user_id = 1038)
+                          Rows Removed by Filter: 124997
+                          Buffers: shared hit=2576
+                    ->  Index Scan using tracks_pkey on tracks t  (cost=0.29..8.31 rows=1 width=19) (actual time=0.005..0.005 rows=1.00 loops=6)
+                          Index Cond: (track_id = s.track_id)
+                          Index Searches: 6
+                          Buffers: shared hit=19
+Planning:
+  Buffers: shared hit=268
+Planning Time: 0.332 ms
+Execution Time: 5.330 ms

@@ -1,0 +1,27 @@
+=== R02 run 1 ===
+Index Scan using tracks_album_id_disc_no_track_no_key on tracks  (cost=0.29..18.92 rows=7 width=24) (actual time=0.009..0.011 rows=14.00 loops=1)
+  Index Cond: (album_id = 1469)
+  Index Searches: 1
+  Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=139
+Planning Time: 0.200 ms
+Execution Time: 0.025 ms
+=== R02 run 2 ===
+Index Scan using tracks_album_id_disc_no_track_no_key on tracks  (cost=0.29..18.92 rows=7 width=24) (actual time=0.010..0.011 rows=14.00 loops=1)
+  Index Cond: (album_id = 1469)
+  Index Searches: 1
+  Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=139
+Planning Time: 0.190 ms
+Execution Time: 0.025 ms
+=== R02 run 3 ===
+Index Scan using tracks_album_id_disc_no_track_no_key on tracks  (cost=0.29..18.92 rows=7 width=24) (actual time=0.009..0.010 rows=14.00 loops=1)
+  Index Cond: (album_id = 1469)
+  Index Searches: 1
+  Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=139
+Planning Time: 0.174 ms
+Execution Time: 0.023 ms

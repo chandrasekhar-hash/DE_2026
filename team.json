@@ -1,0 +1,11 @@
+{
+  "team_number": "T0128",
+  "group_lead": {"name": "Chandrasekhar Panda", "enrollment_no": "Not provided", "github": "chandrasekhar-hash"},
+  "members": [
+    {"name": "Ansh Gupta", "enrollment_no": "Not provided", "github": "Not provided"},
+    {"name": "Tuhinsuvra Roy", "enrollment_no": "Not provided", "github": "tuhinsuvraroy-tsr"},
+    {"name": "Abhradip Ghosal", "enrollment_no": "Not provided", "github": "abhradipghosal18"}
+  ],
+  "postgres_version": "18.1",
+  "laptop_used_for_benchmarks": "Apple Silicon macOS (local PostgreSQL)"
+}

@@ -1,0 +1,72 @@
+=== W05 run 1 ===
+Delete on playlist_tracks  (cost=27.31..2307.39 rows=0 width=0) (actual time=6.809..6.810 rows=0.00 loops=1)
+  Buffers: shared hit=775
+  InitPlan 1
+    ->  Index Scan using tracks_pkey on tracks tracks_1  (cost=0.29..8.31 rows=1 width=4) (actual time=0.004..0.005 rows=1.00 loops=1)
+          Index Cond: (track_id = 1389)
+          Index Searches: 1
+          Buffers: shared hit=3
+  ->  Hash Join  (cost=19.00..2299.08 rows=12 width=12) (actual time=2.843..6.774 rows=2.00 loops=1)
+        Hash Cond: (playlist_tracks.track_id = tracks.track_id)
+        Buffers: shared hit=771
+        ->  Seq Scan on playlist_tracks  (cost=0.00..1965.04 rows=120004 width=10) (actual time=0.005..4.081 rows=120004.00 loops=1)
+              Buffers: shared hit=765
+        ->  Hash  (cost=18.92..18.92 rows=7 width=10) (actual time=0.013..0.013 rows=1.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 9kB
+              Buffers: shared hit=6
+              ->  Index Scan using tracks_album_id_disc_no_track_no_key on tracks  (cost=0.29..18.92 rows=7 width=10) (actual time=0.011..0.011 rows=1.00 loops=1)
+                    Index Cond: (album_id = (InitPlan 1).col1)
+                    Index Searches: 1
+                    Buffers: shared hit=6
+Planning:
+  Buffers: shared hit=246
+Planning Time: 0.394 ms
+Execution Time: 6.882 ms
+=== W05 run 2 ===
+Delete on playlist_tracks  (cost=27.31..2307.39 rows=0 width=0) (actual time=8.743..8.743 rows=0.00 loops=1)
+  Buffers: shared hit=773
+  InitPlan 1
+    ->  Index Scan using tracks_pkey on tracks tracks_1  (cost=0.29..8.31 rows=1 width=4) (actual time=0.004..0.004 rows=1.00 loops=1)
+          Index Cond: (track_id = 1389)
+          Index Searches: 1
+          Buffers: shared hit=3
+  ->  Hash Join  (cost=19.00..2299.08 rows=12 width=12) (actual time=3.566..8.734 rows=2.00 loops=1)
+        Hash Cond: (playlist_tracks.track_id = tracks.track_id)
+        Buffers: shared hit=771
+        ->  Seq Scan on playlist_tracks  (cost=0.00..1965.04 rows=120004 width=10) (actual time=0.003..6.042 rows=120004.00 loops=1)
+              Buffers: shared hit=765
+        ->  Hash  (cost=18.92..18.92 rows=7 width=10) (actual time=0.009..0.010 rows=1.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 9kB
+              Buffers: shared hit=6
+              ->  Index Scan using tracks_album_id_disc_no_track_no_key on tracks  (cost=0.29..18.92 rows=7 width=10) (actual time=0.007..0.007 rows=1.00 loops=1)
+                    Index Cond: (album_id = (InitPlan 1).col1)
+                    Index Searches: 1
+                    Buffers: shared hit=6
+Planning:
+  Buffers: shared hit=246
+Planning Time: 0.345 ms
+Execution Time: 8.791 ms
+=== W05 run 3 ===
+Delete on playlist_tracks  (cost=27.31..2307.39 rows=0 width=0) (actual time=6.916..6.917 rows=0.00 loops=1)
+  Buffers: shared hit=773
+  InitPlan 1
+    ->  Index Scan using tracks_pkey on tracks tracks_1  (cost=0.29..8.31 rows=1 width=4) (actual time=0.004..0.004 rows=1.00 loops=1)
+          Index Cond: (track_id = 1389)
+          Index Searches: 1
+          Buffers: shared hit=3
+  ->  Hash Join  (cost=19.00..2299.08 rows=12 width=12) (actual time=2.816..6.907 rows=2.00 loops=1)
+        Hash Cond: (playlist_tracks.track_id = tracks.track_id)
+        Buffers: shared hit=771
+        ->  Seq Scan on playlist_tracks  (cost=0.00..1965.04 rows=120004 width=10) (actual time=0.003..4.192 rows=120004.00 loops=1)
+              Buffers: shared hit=765
+        ->  Hash  (cost=18.92..18.92 rows=7 width=10) (actual time=0.009..0.009 rows=1.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 9kB
+              Buffers: shared hit=6
+              ->  Index Scan using tracks_album_id_disc_no_track_no_key on tracks  (cost=0.29..18.92 rows=7 width=10) (actual time=0.007..0.007 rows=1.00 loops=1)
+                    Index Cond: (album_id = (InitPlan 1).col1)
+                    Index Searches: 1
+                    Buffers: shared hit=6
+Planning:
+  Buffers: shared hit=246
+Planning Time: 0.339 ms
+Execution Time: 6.968 ms

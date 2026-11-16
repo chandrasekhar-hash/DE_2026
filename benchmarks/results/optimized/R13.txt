@@ -1,0 +1,48 @@
+=== R13 run 1 ===
+Nested Loop Anti Join  (cost=0.29..2335.42 rows=2144 width=24) (actual time=1.830..2.391 rows=1891.00 loops=1)
+  Buffers: shared hit=12601 read=115
+  ->  Seq Scan on playlists p  (cost=0.00..181.00 rows=6317 width=24) (actual time=0.005..0.375 rows=6317.00 loops=1)
+        Filter: is_public
+        Rows Removed by Filter: 3683
+        Buffers: shared hit=81
+  ->  Index Only Scan using streams_playlist_id_idx on streams s  (cost=0.29..0.68 rows=17 width=4) (actual time=0.000..0.000 rows=0.70 loops=6317)
+        Index Cond: (playlist_id = p.playlist_id)
+        Heap Fetches: 0
+        Index Searches: 6317
+        Buffers: shared hit=12520 read=115
+Planning:
+  Buffers: shared hit=331
+Planning Time: 0.459 ms
+Execution Time: 2.445 ms
+=== R13 run 2 ===
+Nested Loop Anti Join  (cost=0.29..2335.42 rows=2144 width=24) (actual time=1.692..2.237 rows=1891.00 loops=1)
+  Buffers: shared hit=12716
+  ->  Seq Scan on playlists p  (cost=0.00..181.00 rows=6317 width=24) (actual time=0.004..0.332 rows=6317.00 loops=1)
+        Filter: is_public
+        Rows Removed by Filter: 3683
+        Buffers: shared hit=81
+  ->  Index Only Scan using streams_playlist_id_idx on streams s  (cost=0.29..0.68 rows=17 width=4) (actual time=0.000..0.000 rows=0.70 loops=6317)
+        Index Cond: (playlist_id = p.playlist_id)
+        Heap Fetches: 0
+        Index Searches: 6317
+        Buffers: shared hit=12635
+Planning:
+  Buffers: shared hit=331
+Planning Time: 0.438 ms
+Execution Time: 2.287 ms
+=== R13 run 3 ===
+Nested Loop Anti Join  (cost=0.29..2335.42 rows=2144 width=24) (actual time=1.700..2.249 rows=1891.00 loops=1)
+  Buffers: shared hit=12716
+  ->  Seq Scan on playlists p  (cost=0.00..181.00 rows=6317 width=24) (actual time=0.004..0.340 rows=6317.00 loops=1)
+        Filter: is_public
+        Rows Removed by Filter: 3683
+        Buffers: shared hit=81
+  ->  Index Only Scan using streams_playlist_id_idx on streams s  (cost=0.29..0.68 rows=17 width=4) (actual time=0.000..0.000 rows=0.70 loops=6317)
+        Index Cond: (playlist_id = p.playlist_id)
+        Heap Fetches: 0
+        Index Searches: 6317
+        Buffers: shared hit=12635
+Planning:
+  Buffers: shared hit=331
+Planning Time: 0.423 ms
+Execution Time: 2.300 ms
