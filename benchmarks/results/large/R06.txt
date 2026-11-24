@@ -1,0 +1,48 @@
+=== R06 run 1 ===
+Nested Loop  (cost=0.85..33.82 rows=3 width=27) (actual time=0.507..0.522 rows=3.00 loops=1)
+  Buffers: shared hit=12 read=7 dirtied=2
+  ->  Index Only Scan using liked_tracks_user_liked_desc_idx on liked_tracks l  (cost=0.43..8.48 rows=3 width=12) (actual time=0.500..0.505 rows=3.00 loops=1)
+        Index Cond: (user_id = 1038)
+        Heap Fetches: 3
+        Index Searches: 1
+        Buffers: shared read=7 dirtied=2
+  ->  Index Scan using tracks_pkey on tracks t  (cost=0.43..8.45 rows=1 width=19) (actual time=0.005..0.005 rows=1.00 loops=3)
+        Index Cond: (track_id = l.track_id)
+        Index Searches: 3
+        Buffers: shared hit=12
+Planning:
+  Buffers: shared hit=299 read=2
+Planning Time: 0.682 ms
+Execution Time: 0.540 ms
+=== R06 run 2 ===
+Nested Loop  (cost=0.85..33.82 rows=3 width=27) (actual time=0.031..0.040 rows=3.00 loops=1)
+  Buffers: shared hit=16
+  ->  Index Only Scan using liked_tracks_user_liked_desc_idx on liked_tracks l  (cost=0.43..8.48 rows=3 width=12) (actual time=0.025..0.025 rows=3.00 loops=1)
+        Index Cond: (user_id = 1038)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=4
+  ->  Index Scan using tracks_pkey on tracks t  (cost=0.43..8.45 rows=1 width=19) (actual time=0.004..0.004 rows=1.00 loops=3)
+        Index Cond: (track_id = l.track_id)
+        Index Searches: 3
+        Buffers: shared hit=12
+Planning:
+  Buffers: shared hit=301
+Planning Time: 0.348 ms
+Execution Time: 0.056 ms
+=== R06 run 3 ===
+Nested Loop  (cost=0.85..33.82 rows=3 width=27) (actual time=0.024..0.031 rows=3.00 loops=1)
+  Buffers: shared hit=16
+  ->  Index Only Scan using liked_tracks_user_liked_desc_idx on liked_tracks l  (cost=0.43..8.48 rows=3 width=12) (actual time=0.018..0.018 rows=3.00 loops=1)
+        Index Cond: (user_id = 1038)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=4
+  ->  Index Scan using tracks_pkey on tracks t  (cost=0.43..8.45 rows=1 width=19) (actual time=0.004..0.004 rows=1.00 loops=3)
+        Index Cond: (track_id = l.track_id)
+        Index Searches: 3
+        Buffers: shared hit=12
+Planning:
+  Buffers: shared hit=301
+Planning Time: 0.335 ms
+Execution Time: 0.046 ms

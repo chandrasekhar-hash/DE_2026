@@ -1,0 +1,84 @@
+=== R20 run 1 ===
+GroupAggregate  (cost=451125.73..1133408.18 rows=4999634 width=43) (actual time=1190.403..2051.149 rows=96.00 loops=1)
+  Group Key: u.country_code, (EXTRACT(hour FROM s.started_at))
+  Buffers: shared hit=2125 read=56039, temp read=43042 written=43124
+  ->  Gather Merge  (cost=451125.73..1033415.50 rows=4999634 width=35) (actual time=1187.197..1787.410 rows=5000000.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=2125 read=56039, temp read=43042 written=43124
+        ->  Sort  (cost=450125.71..455333.66 rows=2083181 width=35) (actual time=1178.798..1293.434 rows=1666666.67 loops=3)
+              Sort Key: u.country_code, (EXTRACT(hour FROM s.started_at))
+              Sort Method: external merge  Disk: 29440kB
+              Buffers: shared hit=2125 read=56039, temp read=43042 written=43124
+              Worker 0:  Sort Method: external merge  Disk: 29288kB
+              Worker 1:  Sort Method: external merge  Disk: 29136kB
+              ->  Parallel Hash Join  (cost=13650.00..117567.14 rows=2083181 width=35) (actual time=244.895..558.273 rows=1666666.67 loops=3)
+                    Hash Cond: (s.user_id = u.user_id)
+                    Buffers: shared hit=2097 read=56039, temp read=21098 written=21120
+                    ->  Parallel Seq Scan on streams s  (cost=0.00..71919.81 rows=2083181 width=12) (actual time=0.053..71.375 rows=1666666.67 loops=3)
+                          Buffers: shared hit=1693 read=49395
+                    ->  Parallel Hash  (cost=9548.00..9548.00 rows=250000 width=7) (actual time=26.697..26.697 rows=200000.00 loops=3)
+                          Buckets: 262144  Batches: 4  Memory Usage: 7968kB
+                          Buffers: shared hit=404 read=6644, temp written=1552
+                          ->  Parallel Seq Scan on users u  (cost=0.00..9548.00 rows=250000 width=7) (actual time=0.051..9.732 rows=200000.00 loops=3)
+                                Buffers: shared hit=404 read=6644
+Planning:
+  Buffers: shared hit=402 read=2
+Planning Time: 0.793 ms
+Execution Time: 2055.976 ms
+=== R20 run 2 ===
+GroupAggregate  (cost=451125.73..1133408.18 rows=4999634 width=43) (actual time=1184.170..2017.606 rows=96.00 loops=1)
+  Group Key: u.country_code, (EXTRACT(hour FROM s.started_at))
+  Buffers: shared hit=2689 read=55475, temp read=43044 written=43122
+  ->  Gather Merge  (cost=451125.73..1033415.50 rows=4999634 width=35) (actual time=1181.111..1771.039 rows=5000000.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=2689 read=55475, temp read=43044 written=43122
+        ->  Sort  (cost=450125.71..455333.66 rows=2083181 width=35) (actual time=1171.149..1278.744 rows=1666666.67 loops=3)
+              Sort Key: u.country_code, (EXTRACT(hour FROM s.started_at))
+              Sort Method: external merge  Disk: 30456kB
+              Buffers: shared hit=2689 read=55475, temp read=43044 written=43122
+              Worker 0:  Sort Method: external merge  Disk: 29016kB
+              Worker 1:  Sort Method: external merge  Disk: 28400kB
+              ->  Parallel Hash Join  (cost=13650.00..117567.14 rows=2083181 width=35) (actual time=214.088..535.659 rows=1666666.67 loops=3)
+                    Hash Cond: (s.user_id = u.user_id)
+                    Buffers: shared hit=2661 read=55475, temp read=21100 written=21120
+                    ->  Parallel Seq Scan on streams s  (cost=0.00..71919.81 rows=2083181 width=12) (actual time=0.055..70.402 rows=1666666.67 loops=3)
+                          Buffers: shared hit=1975 read=49113
+                    ->  Parallel Hash  (cost=9548.00..9548.00 rows=250000 width=7) (actual time=21.409..21.409 rows=200000.00 loops=3)
+                          Buckets: 262144  Batches: 4  Memory Usage: 7968kB
+                          Buffers: shared hit=686 read=6362, temp written=1548
+                          ->  Parallel Seq Scan on users u  (cost=0.00..9548.00 rows=250000 width=7) (actual time=0.046..8.772 rows=200000.00 loops=3)
+                                Buffers: shared hit=686 read=6362
+Planning:
+  Buffers: shared hit=404
+Planning Time: 0.591 ms
+Execution Time: 2049.938 ms
+=== R20 run 3 ===
+GroupAggregate  (cost=451125.73..1133408.18 rows=4999634 width=43) (actual time=1177.937..2074.948 rows=96.00 loops=1)
+  Group Key: u.country_code, (EXTRACT(hour FROM s.started_at))
+  Buffers: shared hit=3253 read=54911, temp read=43044 written=43134
+  ->  Gather Merge  (cost=451125.73..1033415.50 rows=4999634 width=35) (actual time=1174.305..1799.486 rows=5000000.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=3253 read=54911, temp read=43044 written=43134
+        ->  Sort  (cost=450125.71..455333.66 rows=2083181 width=35) (actual time=1163.938..1275.047 rows=1666666.67 loops=3)
+              Sort Key: u.country_code, (EXTRACT(hour FROM s.started_at))
+              Sort Method: external merge  Disk: 28816kB
+              Buffers: shared hit=3253 read=54911, temp read=43044 written=43134
+              Worker 0:  Sort Method: external merge  Disk: 30288kB
+              Worker 1:  Sort Method: external merge  Disk: 28760kB
+              ->  Parallel Hash Join  (cost=13650.00..117567.14 rows=2083181 width=35) (actual time=240.517..547.626 rows=1666666.67 loops=3)
+                    Hash Cond: (s.user_id = u.user_id)
+                    Buffers: shared hit=3225 read=54911, temp read=21100 written=21132
+                    ->  Parallel Seq Scan on streams s  (cost=0.00..71919.81 rows=2083181 width=12) (actual time=0.066..71.713 rows=1666666.67 loops=3)
+                          Buffers: shared hit=2257 read=48831
+                    ->  Parallel Hash  (cost=9548.00..9548.00 rows=250000 width=7) (actual time=36.190..36.190 rows=200000.00 loops=3)
+                          Buckets: 262144  Batches: 4  Memory Usage: 7968kB
+                          Buffers: shared hit=968 read=6080, temp written=1560
+                          ->  Parallel Seq Scan on users u  (cost=0.00..9548.00 rows=250000 width=7) (actual time=0.048..8.897 rows=200000.00 loops=3)
+                                Buffers: shared hit=968 read=6080
+Planning:
+  Buffers: shared hit=404
+Planning Time: 0.583 ms
+Execution Time: 2082.942 ms

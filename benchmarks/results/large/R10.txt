@@ -1,0 +1,48 @@
+=== R10 run 1 ===
+GroupAggregate  (cost=44345.04..50420.15 rows=270005 width=18) (actual time=58.142..76.449 rows=180.00 loops=1)
+  Group Key: ((started_at)::date), platform
+  Buffers: shared hit=97 read=4372, temp read=690 written=693
+  ->  Sort  (cost=44345.04..45020.05 rows=270005 width=10) (actual time=57.910..65.647 rows=274725.00 loops=1)
+        Sort Key: ((started_at)::date), platform
+        Sort Method: external merge  Disk: 5520kB
+        Buffers: shared hit=97 read=4372, temp read=690 written=693
+        ->  Index Scan using streams_started_desc_idx on streams  (cost=0.43..15370.55 rows=270005 width=10) (actual time=0.006..35.140 rows=274725.00 loops=1)
+              Index Cond: ((started_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+              Index Searches: 1
+              Buffers: shared hit=91 read=4372
+Planning:
+  Buffers: shared hit=265
+Planning Time: 0.357 ms
+Execution Time: 78.996 ms
+=== R10 run 2 ===
+GroupAggregate  (cost=44345.04..50420.15 rows=270005 width=18) (actual time=52.743..70.269 rows=180.00 loops=1)
+  Group Key: ((started_at)::date), platform
+  Buffers: shared hit=4469, temp read=690 written=693
+  ->  Sort  (cost=44345.04..45020.05 rows=270005 width=10) (actual time=52.516..60.402 rows=274725.00 loops=1)
+        Sort Key: ((started_at)::date), platform
+        Sort Method: external merge  Disk: 5520kB
+        Buffers: shared hit=4469, temp read=690 written=693
+        ->  Index Scan using streams_started_desc_idx on streams  (cost=0.43..15370.55 rows=270005 width=10) (actual time=0.005..27.981 rows=274725.00 loops=1)
+              Index Cond: ((started_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+              Index Searches: 1
+              Buffers: shared hit=4463
+Planning:
+  Buffers: shared hit=265
+Planning Time: 0.353 ms
+Execution Time: 73.406 ms
+=== R10 run 3 ===
+GroupAggregate  (cost=44345.04..50420.15 rows=270005 width=18) (actual time=49.715..66.204 rows=180.00 loops=1)
+  Group Key: ((started_at)::date), platform
+  Buffers: shared hit=4469, temp read=690 written=693
+  ->  Sort  (cost=44345.04..45020.05 rows=270005 width=10) (actual time=49.512..57.184 rows=274725.00 loops=1)
+        Sort Key: ((started_at)::date), platform
+        Sort Method: external merge  Disk: 5520kB
+        Buffers: shared hit=4469, temp read=690 written=693
+        ->  Index Scan using streams_started_desc_idx on streams  (cost=0.43..15370.55 rows=270005 width=10) (actual time=0.005..27.173 rows=274725.00 loops=1)
+              Index Cond: ((started_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (started_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+              Index Searches: 1
+              Buffers: shared hit=4463
+Planning:
+  Buffers: shared hit=265
+Planning Time: 0.349 ms
+Execution Time: 68.438 ms

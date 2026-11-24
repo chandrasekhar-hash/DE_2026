@@ -1,0 +1,54 @@
+=== R04 run 1 ===
+Limit  (cost=0.86..84.60 rows=9 width=33) (actual time=0.478..0.995 rows=6.00 loops=1)
+  Buffers: shared hit=20 read=12 dirtied=1
+  ->  Nested Loop  (cost=0.86..84.60 rows=9 width=33) (actual time=0.477..0.994 rows=6.00 loops=1)
+        Buffers: shared hit=20 read=12 dirtied=1
+        ->  Index Only Scan using streams_user_started_desc_idx on streams s  (cost=0.43..8.59 rows=9 width=22) (actual time=0.363..0.371 rows=6.00 loops=1)
+              Index Cond: (user_id = 1038)
+              Heap Fetches: 3
+              Index Searches: 1
+              Buffers: shared hit=2 read=6 dirtied=1
+        ->  Index Scan using tracks_pkey on tracks t  (cost=0.43..8.45 rows=1 width=19) (actual time=0.103..0.103 rows=1.00 loops=6)
+              Index Cond: (track_id = s.track_id)
+              Index Searches: 6
+              Buffers: shared hit=18 read=6
+Planning:
+  Buffers: shared hit=400 read=9
+Planning Time: 0.625 ms
+Execution Time: 1.010 ms
+=== R04 run 2 ===
+Limit  (cost=0.86..84.60 rows=9 width=33) (actual time=0.010..0.029 rows=6.00 loops=1)
+  Buffers: shared hit=29
+  ->  Nested Loop  (cost=0.86..84.60 rows=9 width=33) (actual time=0.010..0.028 rows=6.00 loops=1)
+        Buffers: shared hit=29
+        ->  Index Only Scan using streams_user_started_desc_idx on streams s  (cost=0.43..8.59 rows=9 width=22) (actual time=0.004..0.005 rows=6.00 loops=1)
+              Index Cond: (user_id = 1038)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=5
+        ->  Index Scan using tracks_pkey on tracks t  (cost=0.43..8.45 rows=1 width=19) (actual time=0.004..0.004 rows=1.00 loops=6)
+              Index Cond: (track_id = s.track_id)
+              Index Searches: 6
+              Buffers: shared hit=24
+Planning:
+  Buffers: shared hit=409
+Planning Time: 0.528 ms
+Execution Time: 0.042 ms
+=== R04 run 3 ===
+Limit  (cost=0.86..84.60 rows=9 width=33) (actual time=0.009..0.027 rows=6.00 loops=1)
+  Buffers: shared hit=29
+  ->  Nested Loop  (cost=0.86..84.60 rows=9 width=33) (actual time=0.009..0.026 rows=6.00 loops=1)
+        Buffers: shared hit=29
+        ->  Index Only Scan using streams_user_started_desc_idx on streams s  (cost=0.43..8.59 rows=9 width=22) (actual time=0.004..0.004 rows=6.00 loops=1)
+              Index Cond: (user_id = 1038)
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=5
+        ->  Index Scan using tracks_pkey on tracks t  (cost=0.43..8.45 rows=1 width=19) (actual time=0.003..0.003 rows=1.00 loops=6)
+              Index Cond: (track_id = s.track_id)
+              Index Searches: 6
+              Buffers: shared hit=24
+Planning:
+  Buffers: shared hit=409
+Planning Time: 0.490 ms
+Execution Time: 0.040 ms

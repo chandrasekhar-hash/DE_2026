@@ -31,5 +31,8 @@ CREATE INDEX tracks_title_trgm_idx ON tracks USING gin (title gin_trgm_ops);
 -- R11/R14's user/playlist lookups and R06's requested order.
 CREATE INDEX artist_follows_user_followed_idx ON artist_follows (user_id, followed_at DESC);
 CREATE INDEX liked_tracks_user_liked_desc_idx ON liked_tracks (user_id, liked_at DESC) INCLUDE (track_id);
+-- R22: the grouping key is (playlist_id, track_id), so this permits a streaming
+-- GroupAggregate instead of hashing every playlist entry.
+CREATE INDEX playlist_tracks_playlist_track_idx ON playlist_tracks (playlist_id, track_id);
 
 ANALYZE;

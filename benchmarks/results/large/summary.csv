@@ -1,0 +1,31 @@
+query_id,type,avg_ms,median_ms,min_ms,max_ms,scan_nodes
+R01,READ,6.537,0.431,0.384,18.796,Index Only Scan using track_artists_artist_track_idx on track_artists | Index Only Scan using streams_track_started_idx on streams | Index Scan using tracks_pkey on tracks
+R02,READ,0.222,0.020,0.020,0.627,Index Scan using tracks_album_id_disc_no_track_no_key on tracks
+R03,READ,68.372,34.205,31.008,139.904,Bitmap Heap Scan on tracks | Bitmap Index Scan on tracks_title_trgm_idx
+R04,READ,0.364,0.042,0.040,1.010,Index Only Scan using streams_user_started_desc_idx on streams | Index Scan using tracks_pkey on tracks
+R05,READ,1.582,0.127,0.109,4.511,Index Scan using playlist_tracks_pkey on playlist_tracks | Index Scan using tracks_pkey on tracks | Index Scan using track_artists_pkey on track_artists | Index Scan using artists_pkey on artists
+R06,READ,0.214,0.056,0.046,0.540,Index Only Scan using liked_tracks_user_liked_desc_idx on liked_tracks | Index Scan using tracks_pkey on tracks
+R07,READ,98.172,90.088,86.117,118.311,Seq Scan on track_artists | Index Only Scan using streams_royalty_started_track_idx on streams
+R08,READ,7.910,1.559,1.505,20.667,Index Only Scan using track_artists_artist_track_idx on track_artists | Index Scan using tracks_pkey on tracks | Index Scan using streams_track_started_idx on streams
+R09,READ,0.593,0.074,0.065,1.640,Index Only Scan using streams_user_started_desc_idx on streams | Index Scan using track_artists_pkey on track_artists | Index Scan using artists_pkey on artists
+R10,READ,73.613,73.406,68.438,78.996,Index Scan using streams_started_desc_idx on streams
+R11,READ,0.587,0.058,0.053,1.650,Index Only Scan using artist_follows_pkey on artist_follows | Index Scan using albums_artist_release_idx on albums | Index Scan using artists_pkey on artists
+R12,READ,99.505,30.223,30.119,238.174,Index Only Scan using streams_started_desc_idx on streams | Index Scan using tracks_pkey on tracks | Index Scan using users_pkey on users
+R13,READ,49.227,39.146,38.967,69.569,Seq Scan on playlists | Index Only Scan using streams_playlist_id_idx on streams
+R14,READ,102.244,100.720,95.467,110.546,Seq Scan on playlist_tracks | Seq Scan on playlists
+R15,READ,21.624,3.089,2.920,58.863,Index Only Scan using artist_follows_artist_user_idx on artist_follows | Index Only Scan using artist_follows_pkey on artist_follows | Index Scan using artists_pkey on artists
+R16,READ,136.363,125.811,124.626,158.652,Seq Scan on track_artists | Index Only Scan using streams_started_desc_idx on streams
+R17,READ,119.274,123.907,102.927,130.988,Index Only Scan using streams_started_desc_idx on streams | Seq Scan on users
+R18,READ,214.214,189.404,186.419,266.819,Seq Scan on streams
+R19,READ,867.845,830.693,750.162,1022.679,Seq Scan on streams | Seq Scan on track_artists | Seq Scan on artists
+R20,READ,2062.952,2055.976,2049.938,2082.942,Seq Scan on streams | Seq Scan on users
+R21,READ,0.142,0.027,0.024,0.374,Index Scan using tracks_isrc_key on tracks | Index Scan using albums_pkey on albums
+R22,READ,259.043,254.127,252.560,270.443,Index Only Scan using playlist_tracks_playlist_track_idx on playlist_tracks
+R23,READ,11.895,11.864,11.831,11.989,Index Only Scan using streams_started_desc_idx on streams
+R24,READ,112.228,114.855,92.554,129.274,Seq Scan on tracks | Seq Scan on albums
+R25,READ,70.131,16.259,15.138,178.997,Bitmap Heap Scan on albums | Bitmap Index Scan on albums_release_idx | Index Scan using tracks_album_id_disc_no_track_no_key on tracks | Index Scan using streams_track_started_idx on streams
+W01,WRITE,1.136,0.581,0.556,2.270,(no scan)
+W02,WRITE,0.793,0.466,0.445,1.468,(no scan)
+W03,WRITE,0.585,0.444,0.430,0.881,Index Scan using playlists_pkey on playlists | Index Only Scan using playlist_tracks_pkey on playlist_tracks
+W04,WRITE,933.985,917.238,909.105,975.612,Index Scan using artists_pkey on artists | Seq Scan on track_artists | Seq Scan on artists | Index Only Scan using streams_started_desc_idx on streams
+W05,WRITE,140.882,137.147,135.305,150.195,Index Scan using tracks_pkey on tracks | Seq Scan on playlist_tracks | Index Scan using tracks_album_id_disc_no_track_no_key on tracks

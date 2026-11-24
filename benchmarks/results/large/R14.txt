@@ -1,0 +1,108 @@
+=== R14 run 1 ===
+Limit  (cost=73425.03..73425.16 rows=50 width=36) (actual time=90.874..94.031 rows=50.00 loops=1)
+  Buffers: shared hit=1690 read=15343, temp read=1070 written=1073
+  ->  Sort  (cost=73425.03..73475.62 rows=20233 width=36) (actual time=90.873..94.028 rows=50.00 loops=1)
+        Sort Key: (count(DISTINCT pt.added_by_user_id)) DESC, (count(*)) DESC
+        Sort Method: top-N heapsort  Memory: 30kB
+        Buffers: shared hit=1690 read=15343, temp read=1070 written=1073
+        ->  GroupAggregate  (cost=42451.89..72752.91 rows=20233 width=36) (actual time=64.201..92.445 rows=20123.00 loops=1)
+              Group Key: p.playlist_id
+              Buffers: shared hit=1687 read=15343, temp read=1070 written=1073
+              ->  Gather Merge  (cost=42451.89..70729.60 rows=242797 width=24) (actual time=64.191..81.319 rows=241187.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=1687 read=15343, temp read=1070 written=1073
+                    ->  Sort  (cost=41451.87..41704.78 rows=101165 width=24) (actual time=61.970..65.086 rows=80395.67 loops=3)
+                          Sort Key: p.playlist_id, pt.added_by_user_id
+                          Sort Method: external merge  Disk: 2976kB
+                          Buffers: shared hit=1687 read=15343, temp read=1070 written=1073
+                          Worker 0:  Sort Method: external merge  Disk: 2768kB
+                          Worker 1:  Sort Method: external merge  Disk: 2816kB
+                          ->  Parallel Hash Join  (cost=2997.25..30966.34 rows=101165 width=24) (actual time=2.901..50.126 rows=80395.67 loops=3)
+                                Hash Cond: (pt.playlist_id = p.playlist_id)
+                                Buffers: shared hit=1673 read=15343
+                                ->  Parallel Seq Scan on playlist_tracks pt  (cost=0.00..25344.03 rows=1000003 width=8) (actual time=0.042..19.287 rows=800002.67 loops=3)
+                                      Buffers: shared hit=1 read=15343
+                                ->  Parallel Hash  (cost=2848.47..2848.47 rows=11902 width=20) (actual time=2.836..2.836 rows=6707.67 loops=3)
+                                      Buckets: 32768  Batches: 1  Memory Usage: 1408kB
+                                      Buffers: shared hit=1672
+                                      ->  Parallel Seq Scan on playlists p  (cost=0.00..2848.47 rows=11902 width=20) (actual time=0.003..2.357 rows=6707.67 loops=3)
+                                            Filter: is_collaborative
+                                            Rows Removed by Filter: 59959
+                                            Buffers: shared hit=1672
+Planning:
+  Buffers: shared hit=161 read=13
+Planning Time: 1.131 ms
+Execution Time: 95.467 ms
+=== R14 run 2 ===
+Limit  (cost=73425.03..73425.16 rows=50 width=36) (actual time=105.940..107.871 rows=50.00 loops=1)
+  Buffers: shared hit=1972 read=15061, temp read=1069 written=1072
+  ->  Sort  (cost=73425.03..73475.62 rows=20233 width=36) (actual time=105.940..107.869 rows=50.00 loops=1)
+        Sort Key: (count(DISTINCT pt.added_by_user_id)) DESC, (count(*)) DESC
+        Sort Method: top-N heapsort  Memory: 30kB
+        Buffers: shared hit=1972 read=15061, temp read=1069 written=1072
+        ->  GroupAggregate  (cost=42451.89..72752.91 rows=20233 width=36) (actual time=79.607..106.423 rows=20123.00 loops=1)
+              Group Key: p.playlist_id
+              Buffers: shared hit=1969 read=15061, temp read=1069 written=1072
+              ->  Gather Merge  (cost=42451.89..70729.60 rows=242797 width=24) (actual time=79.598..95.738 rows=241187.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=1969 read=15061, temp read=1069 written=1072
+                    ->  Sort  (cost=41451.87..41704.78 rows=101165 width=24) (actual time=78.235..81.047 rows=80395.67 loops=3)
+                          Sort Key: p.playlist_id, pt.added_by_user_id
+                          Sort Method: external merge  Disk: 2968kB
+                          Buffers: shared hit=1969 read=15061, temp read=1069 written=1072
+                          Worker 0:  Sort Method: external merge  Disk: 2768kB
+                          Worker 1:  Sort Method: external merge  Disk: 2816kB
+                          ->  Parallel Hash Join  (cost=2997.25..30966.34 rows=101165 width=24) (actual time=2.845..60.213 rows=80395.67 loops=3)
+                                Hash Cond: (pt.playlist_id = p.playlist_id)
+                                Buffers: shared hit=1955 read=15061
+                                ->  Parallel Seq Scan on playlist_tracks pt  (cost=0.00..25344.03 rows=1000003 width=8) (actual time=0.045..23.594 rows=800002.67 loops=3)
+                                      Buffers: shared hit=283 read=15061
+                                ->  Parallel Hash  (cost=2848.47..2848.47 rows=11902 width=20) (actual time=2.775..2.775 rows=6707.67 loops=3)
+                                      Buckets: 32768  Batches: 1  Memory Usage: 1408kB
+                                      Buffers: shared hit=1672
+                                      ->  Parallel Seq Scan on playlists p  (cost=0.00..2848.47 rows=11902 width=20) (actual time=0.003..2.321 rows=6707.67 loops=3)
+                                            Filter: is_collaborative
+                                            Rows Removed by Filter: 59959
+                                            Buffers: shared hit=1672
+Planning:
+  Buffers: shared hit=174
+Planning Time: 0.367 ms
+Execution Time: 110.546 ms
+=== R14 run 3 ===
+Limit  (cost=73425.03..73425.16 rows=50 width=36) (actual time=96.693..99.614 rows=50.00 loops=1)
+  Buffers: shared hit=2254 read=14779, temp read=1069 written=1072
+  ->  Sort  (cost=73425.03..73475.62 rows=20233 width=36) (actual time=96.692..99.612 rows=50.00 loops=1)
+        Sort Key: (count(DISTINCT pt.added_by_user_id)) DESC, (count(*)) DESC
+        Sort Method: top-N heapsort  Memory: 30kB
+        Buffers: shared hit=2254 read=14779, temp read=1069 written=1072
+        ->  GroupAggregate  (cost=42451.89..72752.91 rows=20233 width=36) (actual time=69.777..98.184 rows=20123.00 loops=1)
+              Group Key: p.playlist_id
+              Buffers: shared hit=2251 read=14779, temp read=1069 written=1072
+              ->  Gather Merge  (cost=42451.89..70729.60 rows=242797 width=24) (actual time=69.768..87.030 rows=241187.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=2251 read=14779, temp read=1069 written=1072
+                    ->  Sort  (cost=41451.87..41704.78 rows=101165 width=24) (actual time=68.175..71.284 rows=80395.67 loops=3)
+                          Sort Key: p.playlist_id, pt.added_by_user_id
+                          Sort Method: external merge  Disk: 2848kB
+                          Buffers: shared hit=2251 read=14779, temp read=1069 written=1072
+                          Worker 0:  Sort Method: external merge  Disk: 2928kB
+                          Worker 1:  Sort Method: external merge  Disk: 2776kB
+                          ->  Parallel Hash Join  (cost=2997.25..30966.34 rows=101165 width=24) (actual time=2.844..54.259 rows=80395.67 loops=3)
+                                Hash Cond: (pt.playlist_id = p.playlist_id)
+                                Buffers: shared hit=2237 read=14779
+                                ->  Parallel Seq Scan on playlist_tracks pt  (cost=0.00..25344.03 rows=1000003 width=8) (actual time=0.046..23.723 rows=800002.67 loops=3)
+                                      Buffers: shared hit=565 read=14779
+                                ->  Parallel Hash  (cost=2848.47..2848.47 rows=11902 width=20) (actual time=2.774..2.775 rows=6707.67 loops=3)
+                                      Buckets: 32768  Batches: 1  Memory Usage: 1408kB
+                                      Buffers: shared hit=1672
+                                      ->  Parallel Seq Scan on playlists p  (cost=0.00..2848.47 rows=11902 width=20) (actual time=0.003..2.318 rows=6707.67 loops=3)
+                                            Filter: is_collaborative
+                                            Rows Removed by Filter: 59959
+                                            Buffers: shared hit=1672
+Planning:
+  Buffers: shared hit=174
+Planning Time: 0.396 ms
+Execution Time: 100.720 ms
